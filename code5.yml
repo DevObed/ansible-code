@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  become: yes
+  gather_facts: yes
+  ignore_errors: yes
+  tasks:
+    - name: modify config file
+      lineinfile: 
+         path: /etc/selinux/semanage.conf
+         #regexp: '^module-store ='
+         insertafter: '^module-store ='
+         line: module-store = yes
+         state: absent
+         #create: yes
+      

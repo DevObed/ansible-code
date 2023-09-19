@@ -4,7 +4,17 @@
   gather_facts: yes
   vars:
      user_name: obed2023
+  ignore_errors: true   
   tasks:
+    - name: Install softwares
+      package: 
+        state: present
+        name: "{{ item }}"
+      loop:
+        -wget
+        -finger
+        -curl
+        -ntp
     - name: install passwd
       apt: 
          name: passwd

@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+  ignore_errors: yes
+  tasks:
+     - name: check uptime
+       command: uptime
+       register: uptime_output
+     - name: create user
+       user:
+         name: obed2023
+         comment: Obed Admin
+       when: uptime_output.rc != 100
+     - name: Display uptime_output
+       debug:
+         var: uptime_output

@@ -1,0 +1,12 @@
+---
+- hosts: webservers
+  become: yes
+  gather_facts: yes
+  ignore_errors: yes
+  tasks:
+    - name: Download artifacts from nexus
+      get_url:
+        url: http://198.58.119.40:8081/repository/prof-repo/bioMedical-0.0.6-SNAPSHOT.jar
+        dest: /tmp 
+        url_username: admin
+        url_password: devops
